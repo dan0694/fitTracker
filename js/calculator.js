@@ -1,30 +1,26 @@
-    let age = prompt("Por favor, ingrese su edad");
-    getIMC(age);
-    let again = confirm("Desea volver a ejecutar la calculadora de IMC?");
-    while(again) {
-        let age = prompt("Por favor, ingrese su edad");
-        getIMC(age);
-        again = confirm("Desea volver a ejecutar la calculadora de IMC?");
-    }
-   
 
-    function getIMC(age) {
-        if (!age){
-            alert("Debes de ingresar un valor");
-        }else if(age < 20) {
-            alert("Lo sentimos, debes de tener más de 20 años para que este cálculo sea más aproximado");
+    
+    let user = JSON.parse(localStorage.getItem('user'));
+
+    if(user.age){
+        document.getElementById('runIMC').disabled = false;
+    }
+    function checkAge() {
+        if (!user.age){
+            alert("Debes de ingresar una edad valida");
+        }else if(user.age < 20 || Number.isInteger(user.age) === false ) {
+            alert("Ingresa una edad válida, recuerda que debes de tener más de 20 años para que este cálculo sea más aproximado");
         } else{
             let imc = calculateIMC();
-            alert("Su Indice de Masa Corporal (IMC) es de: "+  imc);
+            alert("Su Indice de Masa Corporal (IMC) es de: "+ imc);
             let classification = classifyIMC(imc);
             alert("Su nivel de peso se encuentra en: "+ classification);
         }
     }
 
     function calculateIMC() {
-        let height = prompt("Ingrese su altura en centimetros (cm)");
-        let weight = prompt("Ingrese su peso en kilogramos (kg)");
-        let imc = (weight / ( Math.pow((height/100), 2)));
+
+        let imc = (user.weight / ( Math.pow((user.height/100), 2)));
         return imc.toFixed(2);
        
     }
