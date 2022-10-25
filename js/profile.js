@@ -1,5 +1,6 @@
 showProfile();
 
+// Carga los datos por primera vez
 function showProfile(){
     let user = JSON.parse(localStorage.getItem('user'));
     if(user){
@@ -10,21 +11,29 @@ function showProfile(){
         <p>Edad: ${user.age}</p>
         <p>Altura: ${user.height}</p>
         <p>Peso: ${user.weight}</p>
+        <p>Genero: ${user.gender}</p>
     `;
-    } else{
-        alert("Presiona el botón para completar tu perfil.");
-    }
+    document.querySelector('#userName').value = user.name;
+    document.querySelector('#userAge').value = user.age;
+    document.querySelector('#userHeight').value = user.height;
+    document.querySelector('#userWeight').value = user.weight;
+    document.querySelector('#userGender').value = user.gender;
+    document.querySelector('#userActivity').value = user.activityIndicator;
+    } 
 }
 
+// Agrega los datos del form a localStorage
 function fillProfile(){
-    let name = prompt("Por favor, ingrese su nombre");
-    let age = parseInt(prompt("Por favor, ingrese su edad"));
+    let name = document.querySelector('#userName').value;
+    let age = parseInt(document.querySelector('#userAge').value);
     // gender:prompt("Por favor, ingrese su género (Masculino o Femenino)"),
-    let height = parseInt(prompt("Por favor, ingrese su altura en centimetros (cm)"));
-    let weight = parseInt(prompt("Por favor, ingrese su peso en kilogramos (kg)"));
-    let user = new User(name, age, height, weight);
+    let height = parseInt(document.querySelector('#userHeight').value);
+    let weight = parseInt(document.querySelector('#userWeight').value);
+    let gender = (document.querySelector('#userGender').value);
+    console.log(gender);
+    let activity = parseInt(document.querySelector('#userActivity').value);
+    let user = new User(name, age, height, weight, gender, activity);
     localStorage.setItem('user', JSON.stringify(user));
-    console.log(localStorage.getItem("user"));
     let profile = document.getElementById('info');
     profile.innerHTML=`
         <h3>Información del usuario</h3>
@@ -32,12 +41,21 @@ function fillProfile(){
         <p>Edad: ${user.age}</p>
         <p>Altura: ${user.height}</p>
         <p>Peso: ${user.weight}</p>
+        <p>Genero: ${user.gender}</p>
     `;
+    
 }
 
-
+// Eliminamos los datos del usuario
 function deleteData() {
     localStorage.removeItem("user");
     let profile = document.getElementById('info');
     profile.innerHTML=``;
+    document.querySelector('#userName').value = "";
+    document.querySelector('#userAge').value = "";
+    document.querySelector('#userHeight').value = "";
+    document.querySelector('#userWeight').value = "";
+    document.querySelector('#userGender').value = "";
+    document.querySelector('#userActivity').value = "";
 }
+

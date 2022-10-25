@@ -4,20 +4,58 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calcula tu IMC</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <title>Calcula tu IMC | Fitbuddy</title>
+    <link rel="icon" type="image/x-icon" href="../img/favicon.ico">
+
 </head>
 <body>
-    <h1>Calcula tu Indice de Masa Corporal</h1>
-    <p>El índice de masa corporal (IMC) es un número que se calcula con base en 
-        el peso y la estatura de la persona. Para la mayoría de las personas, el IMC es un indicador 
-        confiable de la gordura y se usa para identificar las categorías de peso que pueden llevar a problemas de salud.</p>
-    <button id="runIMC" onclick="checkAge()" disabled>Calcular IMC</button>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-fluid">
+              <a class="navbar-brand"  href="../index.html">
+                <img src="../img/fitbuddylogo.png" alt="" srcset="" width="190px">
+              </a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="../index.html">Home</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="./profile.html">Perfil</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link active" href="./calorie_calculator.html">Calculadora IMC</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="./workout.html">Creador de rutinas</a>
+                  </li>
+                
+                </ul>
+              </div>
+            </div>
+          </nav>
+    </header>
+    <main>
+      <div class="container mt-5">
+        <h1>Tu Indice de Masa Corporal</h1>
+        <p>El índice de masa corporal (IMC) es un número que se calcula con base en 
+            el peso y la estatura de la persona. Para la mayoría de las personas, el IMC es un indicador 
+            confiable de la gordura y se usa para identificar las categorías de peso que pueden llevar a problemas de salud.</p>
+        <div id="imc">
+        </div>
+        <div id="calories">
+        </div>
+      </div>
+    </main>
+   
 
-    <div>
-        <a href="../index.html">Home</a>
-        <a href="./profile.html">Perfil</a>
-        <a href="./workout.html">Crear rutina</a>
-    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
     <script src="../js/User.js"></script>
     <script src="../js/calculator.js"></script>
     

@@ -1,9 +1,11 @@
 class User{
-    constructor(name, age, height, weight){
+    constructor(name, age, height, weight, gender, activityIndicator){
         this.name = name;
         this.age = age;
         this.height = height;
         this.weight = weight;
+        this.gender = gender;
+        this.activityIndicator = activityIndicator;
     }
 
     imc(){

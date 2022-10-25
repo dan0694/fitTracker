@@ -1,3 +1,7 @@
-.active{
-    background-color: #f1b367;
+.selector-for-some-widget {
+    box-sizing: content-box;
+  }
+
+.row>*{
+  padding: 0 !important;
 }
