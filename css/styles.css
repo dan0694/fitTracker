@@ -26,3 +26,10 @@
 .cover p{
   margin: 0 15rem;
 }
+
+.info p{
+  font-size: 20px;
+}
+.info-content{
+  font-weight: 500;
+}

@@ -3,7 +3,6 @@ showProfile();
 
 function setForm() {
     let container = document.querySelector("#container");
-    console.log(container);
     container.innerHTML = `
     <h1>Perfil de usuario</h1>
     <p class="fs-6">Por favor, ingrese sus datos</p>
@@ -66,12 +65,14 @@ function showProfile() {
     if (user) {
         let profile = document.getElementById('info');
         profile.innerHTML = `
-        <h3>Información del usuario</h3>
-        <p>Nombre: ${user.name}</p>
-        <p>Edad: ${user.age}</p>
-        <p>Altura: ${user.height}</p>
-        <p>Peso: ${user.weight}</p>
-        <p>Genero: ${user.gender}</p>
+            <div class="info shadow m-2 rounded px-5 py-1">
+                <h3 class="text-center">Información del usuario</h3>
+                <p>Nombre: <span class="info-content"> ${user.name}</span></p>
+                <p>Edad: <span class="info-content"> ${user.age}</span></p>
+                <p>Altura: <span class="info-content"> ${user.height}</span></p>
+                <p>Peso: <span class="info-content"> ${user.weight}</span></p>
+                <p>Genero: <span class="info-content"> ${user.gender}</span></p>
+            </div>
     `;
         document.querySelector('#userName').value = user.name;
         document.querySelector('#userAge').value = user.age;

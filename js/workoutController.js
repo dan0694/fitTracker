@@ -71,8 +71,8 @@ function addExercise() {
     let input = document.createElement('div');
     input.innerHTML = `
     <div class="input-group mb-3" id="exercise-${numberOfExcercises}">
-        <select id="input-exercise-${numberOfExcercises}" class="form-control" placeholder="Agrega un ejercicio"  aria-describedby="button-remove-${numberOfExcercises}"></select>
-        <button class="btn btn-outline-dark" type="button" id="button-remove-${numberOfExcercises}" onclick="removeExercise(${numberOfExcercises})">x</button>
+        <select id="input-exercise-${numberOfExcercises}" class="form-control m-4" placeholder="Agrega un ejercicio"  aria-describedby="button-remove-${numberOfExcercises}"></select>
+        <button class="btn btn-outline-dark ml-5" type="button" id="button-remove-${numberOfExcercises}" onclick="removeExercise(${numberOfExcercises})">x</button>
     </div>
     `;
     div.appendChild(input);
@@ -134,7 +134,7 @@ function addPanel(workout) {
     let workoutDiv = document.getElementById('workout');
     let card = document.createElement("div");
     card.setAttribute('id', 'card-' + workout.title);
-    card.classList.add('card', 'my-5', 'col-md-4');
+    card.classList.add('card', 'm-5', 'col-md-3');
 
     let header = document.createElement('div');
     header.classList.add('card-header');

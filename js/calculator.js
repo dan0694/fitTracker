@@ -2,6 +2,7 @@
     
     let user = JSON.parse(localStorage.getItem('user'));
     checkAge();
+    // Valida que la edad del usuario sea menor a 20 años, para que los cálculos sean efectivos
     function checkAge() {
         if(!user ) {
             let str = 'Ingresa tus datos en la sección de Perfil.';
@@ -14,6 +15,7 @@
         }
     }
 
+    // Calcula el Indice de Masa Corporal
     function calculateIMC() {
 
         let imc = (user.weight / ( Math.pow((user.height/100), 2)));
@@ -21,6 +23,7 @@
        
     }
 
+    // Clasifica el indice de masa corporal en base al valor obtenido
     function classifyIMC(imc) {
         let classification = "";
         switch (true) {
@@ -47,6 +50,7 @@
         return classification;
     }
 
+    // Agrega el contenido calculado a DOM
     function addCard(str) {
         let div = document.querySelector('#imc');
         if (str === undefined) {
@@ -73,7 +77,7 @@
     }
 
 
-    
+// Gestiona el cálculo de calorías en base al género
 function calculateCalories(){
     let bmr
     if (user.gender === "Femenino") {
@@ -85,65 +89,21 @@ function calculateCalories(){
     addCaloriesCard(calories.toFixed(2));
 }
 
+// Calculo de calorías base para mujeres
 function calculateBMRForWomen(){
     let BMR = 0;
-    // switch (true) {
-    //     case age <= 3:
-    //         BMR = (58.317 * weight) - 31.1;
-    //         break;
-    //     case age > 3 && age <= 10:
-    //         BMR = (20.315 * weight) + 485.9;
-    //         break;
-    //     case age > 10 && age <= 18:
-    //         BMR = (13.384 * weight) + 692.6;
-    //         break;
-    //     case age > 18 && age <= 30:
-    //         BMR = (14.818 * weight) + 486.6;
-    //         break;
-    //     case age > 30 && age <= 60:
-    //         BMR = (8.126 * weight) + 845.6;
-    //         break;
-    //     case age > 60:
-    //         BMR = (9.082 * weight) + 658.5;
-    //         break;
-    
-    //     default:
-    //         break;
-    // }
-    // Harris-Benedict
      BMR = 655 + (9.6*user.weight) + (1.8*user.height) - (4.7*user.age)
     return BMR;
 }
+
+// Calculo de calorías base para hombres
 function calculateBMRForMen(){
     let BMR = 0;
-    // switch (true) {
-    //     case age <= 3:
-    //         BMR = (59.512 * weight) - 30.4;
-    //         break;
-    //     case age > 3 && age <= 10:
-    //         BMR = (22.706 * weight) + 504.3;
-    //         break;
-    //     case age > 10 && age <= 18:
-    //         BMR = (17.686 * weight) + 658.2;
-    //         break;
-    //     case age > 18 && age <= 30:
-    //         BMR = (15.057 * weight) + 692.2;
-    //         break;
-    //     case age > 30 && age <= 60:
-    //         BMR = (11.472 * weight) + 873.1;
-    //         break;
-    //     case age > 60:
-    //         BMR = (11.711 * weight) + 587.7;
-    //         break;
-    
-    //     default:
-    //         break;
-    // }
-    // Harris-Benedict
      BMR = 66 + (13.7*user.weight) + (5*user.height) - (6.75*user.age)
     return BMR;
 }
 
+// Agrega un porcentaje en base al nivel de actividad física del usuario
 function addActivityToBMR(bmr){
     let calories;
     switch (user.activityIndicator) {
@@ -170,6 +130,7 @@ function addActivityToBMR(bmr){
     return calories;
 }
 
+// Agrega la data de las calorías a DOM
 function addCaloriesCard(calories){
     let div = document.querySelector('#calories');
     let activity = getActivityIndicator(user.activityIndicator);
@@ -188,6 +149,7 @@ function addCaloriesCard(calories){
    
 }
 
+// Mapeo de nivel de actividad guardado en LocalStorage
 function getActivityIndicator(activity){
     let indicator;
     switch (activity) {
