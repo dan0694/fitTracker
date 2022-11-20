@@ -5,3 +5,24 @@
 .row>*{
   padding: 0 !important;
 }
+
+.body{
+  background-image: linear-gradient(rgba(0, 0, 0, 0.842), rgba(0, 0, 0, 0.5)), url("../img/img01.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+}
+
+.cover{
+  color: white;
+  text-align: center;
+
+}
+
+.cover h1{
+  margin: 8rem 10rem;
+}
+
+.cover p{
+  margin: 0 15rem;
+}

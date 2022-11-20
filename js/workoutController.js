@@ -18,6 +18,8 @@ function showWorkout() {
 
 }
 
+
+
 // Consigue las rutinas de localstorage
 function getWorkouts() {
     let workouts = [];
@@ -69,11 +71,30 @@ function addExercise() {
     let input = document.createElement('div');
     input.innerHTML = `
     <div class="input-group mb-3" id="exercise-${numberOfExcercises}">
-        <input type="text" id="input-exercise-${numberOfExcercises}" class="form-control" placeholder="Agrega un ejercicio" aria-label="Recipient's username" aria-describedby="button-remove-${numberOfExcercises}">
+        <select id="input-exercise-${numberOfExcercises}" class="form-control" placeholder="Agrega un ejercicio"  aria-describedby="button-remove-${numberOfExcercises}"></select>
         <button class="btn btn-outline-dark" type="button" id="button-remove-${numberOfExcercises}" onclick="removeExercise(${numberOfExcercises})">x</button>
     </div>
     `;
     div.appendChild(input);
+    uploadExcercises("input-exercise-" + numberOfExcercises);
+}
+// Obtiene un listado de ejercicios de un API y los agrega al select 
+async function uploadExcercises(id) {
+    let select = document.querySelector("#"+id);
+    let url = "https://wger.de/api/v2/exercise/?limit=400";
+    const resp = await fetch(url)
+        .then((data) => data.json())
+        .then((json) => {
+            json.results.forEach((excercise) => {
+                let option = document.createElement('option');
+                option.value = excercise.name;
+                option.innerHTML = excercise.name;
+                select.appendChild(option);
+                
+            });
+        });
+    // Librería para filtrar info
+    let mySelect = new Select("#"+id);
 
 }
 
@@ -99,9 +120,11 @@ function addWorkout() {
     workoutArray = [];
     addPanel(workout);
     removeForm();
+    setAlert("Se ha agregado tu nueva rutina");
 }
+
 // elimina el formulario
-function removeForm(){
+function removeForm() {
     let div = document.querySelector('#newWorkout');
     div.replaceChildren();
 }
@@ -110,7 +133,7 @@ function removeForm(){
 function addPanel(workout) {
     let workoutDiv = document.getElementById('workout');
     let card = document.createElement("div");
-    card.setAttribute('id', 'card-'+workout.title);
+    card.setAttribute('id', 'card-' + workout.title);
     card.classList.add('card', 'my-5', 'col-md-4');
 
     let header = document.createElement('div');
@@ -150,29 +173,60 @@ function searchworkout(e) {
     let key = e.target.value;
     for (const workout of workouts) {
         for (const exercise of workout.exercises) {
-            let div = document.querySelector('.'+exercise.name.replaceAll(' ', '-'));
-            if(exercise.name.includes(key) && key != ''){
+            let div = document.querySelector('.' + exercise.name.replaceAll(' ', '-'));
+            if (exercise.name.includes(key) && key != '') {
                 div.style.backgroundColor = '#78dede';
-            } else if(key === ''){
+            } else if (key === '') {
                 let li = document.querySelectorAll('p');
                 for (const listItem of li) {
                     listItem.style.backgroundColor = "white"
                 }
-            } else{
+            } else {
                 div.style.backgroundColor = 'white';
             }
         }
     }
 }
 
+//Muestra mensaje de confirmación
+function removeWorkout(title) {
+    swal({
+        title: 'Seguro que desea eliminar la rutina?',
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#DD6B55',
+        confirmButtonText: 'Si',
+        cancelButtonText: 'No'
+    }).then((result) => {
+        if (result.value) {
+            clear(title);
+        }
+    });
+
+}
+
 // Elimina una rutina del DOM y de localStorage
-function removeWorkout(title){
-    let div = document.querySelector('#card-'+title);
+function clear(title) {
+    let div = document.querySelector('#card-' + title);
     div.remove();
     let workouts = getWorkouts();
     for (const workout of workouts) {
-        if(workout.title === title){
-            localStorage.removeItem('workout-'+workout.id);
+        if (workout.title === title) {
+            localStorage.removeItem('workout-' + workout.id);
         }
     }
+    setAlert("Se ha eliminado la rutina");
+}
+
+// Agrega una alerta de confirmación al registrar datos
+function setAlert(text) {
+    Toastify({
+        text: text,
+        duration: 3000,
+        gravity: "top",
+        position: "right",
+        style: {
+            background: "linear-gradient(to right, #00b09b, #96c93d)",
+        },
+    }).showToast();
 }
